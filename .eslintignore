@@ -1,0 +1,5 @@
+.eslintrc.js
+vite.config.ts
+/dist
+.vit
+*.html

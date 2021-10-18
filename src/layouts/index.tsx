@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button, Result, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import ProLayout, { PageContainer } from '@ant-design/pro-layout';
-import Logo from '@/assets/logo.svg';
+import type { IRouteComponentProps } from 'umi';
+import { Link } from 'umi';
 import defaultProps from './config';
 
-export default () => {
-  const [pathname, setPathname] = useState('/');
+const Layout: React.FC<IRouteComponentProps> = (props) => {
+  const { location } = props;
+
   return (
     <div
       id="test-pro-layout"
@@ -16,24 +18,19 @@ export default () => {
     >
       <ProLayout
         {...defaultProps}
-        logo={Logo}
-        title="测试用Title"
-        // loading
-        location={{
-          pathname,
-        }}
+        location={location}
         waterMarkProps={{
-          content: 'xxxxx',
+          content: 'Pro Layout',
         }}
-        menuItemRender={(item, dom) => (
-          <a
-            onClick={() => {
-              setPathname(item.path || '/');
-            }}
-          >
-            {dom}
-          </a>
-        )}
+        menuItemRender={(item, dom) => {
+          if (item.isUrl || item.children) {
+            return dom;
+          }
+          if (item.path && location.pathname !== item.path) {
+            return <Link to={item.path}>{dom}</Link>;
+          }
+          return dom;
+        }}
         rightContentRender={() => (
           <div>
             <Avatar shape="square" size="small" icon={<UserOutlined />} />
@@ -58,3 +55,5 @@ export default () => {
     </div>
   );
 };
+
+export default Layout;

@@ -2,11 +2,12 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "build": "umi build",
+    "build": "umi build --quie",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier"
+    "lint": "npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "ana": "cross-env ANALYZE=1 umi build"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -30,6 +31,7 @@
     "@types/react-dom": "^17.0.0",
     "@umijs/fabric": "^2.8.1",
     "@umijs/preset-react": "^1.8.24",
+    "cross-env": "^7.0.3",
     "husky": "^7.0.2",
     "lint-staged": "^11.2.3",
     "prettier": "^2.2.0",

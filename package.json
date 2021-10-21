@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "build": "umi build --quie",
+    "build": "umi build",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
@@ -22,6 +22,7 @@
   "dependencies": {
     "@ant-design/pro-layout": "^6.26.4",
     "antd": "^4.16.13",
+    "mockjs": "^1.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "umi": "^3.5.20"

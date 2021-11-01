@@ -8,3 +8,15 @@ declare module '*.svg' {
   const url: string;
   export default url;
 }
+declare namespace API {
+  export type Params = {
+    showMessage?: boolean;
+  };
+
+  export type response = {
+    data?: any;
+    msg?: string;
+    code?: string;
+    [propName: string]: any;
+  };
+}

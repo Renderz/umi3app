@@ -1,8 +1,9 @@
 import React from 'react';
-import { Avatar } from 'antd';
+import { Avatar, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import ProLayout, { PageContainer } from '@ant-design/pro-layout';
 import type { IRouteComponentProps } from 'umi';
+import { UseRequestProvider } from 'umi';
 import { Link } from 'umi';
 import defaultProps from './config';
 
@@ -43,7 +44,19 @@ const Layout: React.FC<IRouteComponentProps> = (props) => {
         )}
       >
         <PageContainer header={{ title: undefined, breadcrumb: {} }}>
-          <div>{children}</div>
+          <div style={{ height: 'calc(100vh - 80px)' }}>
+            <UseRequestProvider
+              value={{
+                onSuccess: (result: API.response, params: [API.Params]) => {
+                  if (params?.[0]?.showMessage) {
+                    message.success(result.msg);
+                  }
+                },
+              }}
+            >
+              {children}
+            </UseRequestProvider>
+          </div>
         </PageContainer>
       </ProLayout>
     </div>

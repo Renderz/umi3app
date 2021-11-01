@@ -1,34 +1,40 @@
+import type { Request, Response } from 'express';
+
 function delay(ms: number, msg?: string) {
   return new Promise((resolve) => setTimeout(() => resolve(msg), ms));
 }
 
-type Response = {
-  data: any;
-  message: string;
-  code: string;
-  success: boolean;
-};
-
 export default {
-  'GET /api/base': (req, res) => {
+  'GET /api/standard/success': (req: Request, res: Response) => {
     delay(2000).then(() => {
-      res.send({
-        data: {
-          a: 1,
-          b: 2,
-        },
-        message: '请求GET成功!',
+      res.status(200).send({
+        msg: '请求GET成功!',
         code: '200000',
-        success: true,
-      });
+      } as API.response);
     });
   },
-  'GET /api/error': (req, res) => {
+  'GET /api/nonstandard/success': (req: Request, res: Response) => {
+    delay(2000).then(() => {
+      res.status(200).send({
+        non_standard_msg: '请求GET成功!',
+        non_standard_code: '200000',
+      } as API.response);
+    });
+  },
+  'GET /api/standard/networkError': (req: Request, res: Response) => {
     delay(2000).then(() => {
       res.status(500).send({
-        code: '500577',
-        message: '一般错误',
-      });
+        msg: '请求GET网络失败!',
+        code: '500100',
+      } as API.response);
+    });
+  },
+  'GET /api/standard/bizError': (req: Request, res: Response) => {
+    delay(2000).then(() => {
+      res.status(200).send({
+        msg: '请求GET业务失败!',
+        code: '500100',
+      } as API.response);
     });
   },
 };

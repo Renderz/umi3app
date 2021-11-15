@@ -13,10 +13,12 @@ declare namespace API {
     showMessage?: boolean;
   };
 
-  export type response = {
-    data?: any;
-    msg?: string;
-    code?: string;
-    [propName: string]: any;
-  };
+  export type Response =
+    | {
+        data?: any;
+        msg?: string;
+        code?: string;
+        [propName: string]: any;
+      }
+    | undefined;
 }
